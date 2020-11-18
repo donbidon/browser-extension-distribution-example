@@ -1,9 +1,14 @@
 # Self distributed browser extension
 
-If you don't wanna pay Google to publish and distribute your
-Chrome browser extensions in
+If you
+* cannot give public access to your extension,
+* don't wanna pay Google to publish and distribute your Chrome browser
+extensions in 
 [web store](https://chrome.google.com/webstore/category/extensions),
-you can modify and use this example extension as basis.
+* wanna to track installing/updating or starting your extension or
+something else,
+
+you can use this example extension as basis with your modifications.
 
 Every time you install/update extension or open browser having
 already installed this extension, it sends request to remote
