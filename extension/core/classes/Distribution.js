@@ -96,13 +96,15 @@ class Distribution {
      * @param {Object} response - Successful response data
      */
     onResponseReceived(response) {
-        console.log(
-            "%c%s:%c Response received",
-            this.log.style.header,
-            this.log.header,
-            this.log.style.common,
-        );
-        console.log(response);
+        if (this.log) {
+            this.log.method(
+                "%c%s:%c Response received",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.common,
+            );
+            console.log(response);
+        }
     }
 
     /**
@@ -112,13 +114,15 @@ class Distribution {
      * @param {XMLHttpRequest} xhr
      */
     onInvalidResponseReceived(xhr) {
-        console.error(
-            "%c%s:%c Requesting remote service failed",
-            this.log.style.header,
-            this.log.header,
-            this.log.style.common,
-        );
-        console.error(xhr);
+        if (this.log) {
+            console.error(
+                "%c%s:%c Requesting remote service failed",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.common,
+            );
+            this.log.method(xhr);
+        }
     }
 
     /**
@@ -128,13 +132,15 @@ class Distribution {
      * @param {Object} response - Response data
      */
     onUpdateRequired(response) {
-        console.warn(
-            "%c%s:%c Update required",
-            this.log.style.header,
-            this.log.header,
-            this.log.style.common,
-        );
-        console.log(response);
+        if (this.log) {
+            this.log.method(
+                "%c%s:%c Update required",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.common,
+            );
+            this.log.method(response);
+        }
     }
 
     /**
@@ -218,13 +224,15 @@ class Distribution {
                         this.onResponseReceived(response);
                     }
                 } catch (e) {
-                    console.error(
-                        "%c%s:%c Cannot parse JSON response",
-                        this.log.style.header,
-                        this.log.header,
-                        this.log.style.common,
-                    );
-                    console.error(e);
+                    if (this.log) {
+                        console.error(
+                            "%c%s:%c Cannot parse JSON response",
+                            this.log.style.header,
+                            this.log.header,
+                            this.log.style.common,
+                        );
+                        console.error(e);
+                    }
                     this.onInvalidResponseReceived(xhr);
                 }
             })
