@@ -14,7 +14,7 @@
  *     // @see config.distribution section
  * });
  * // distribution.log = null; // Suppress debug output to browser console
- * distribution.signRequest = (data) => {
+ * distribution.modifyRequest = (data) => {
  *     // data.sign = ...;
  * };
  * distribution.onResponseReceived = (response) => {
@@ -78,16 +78,16 @@ class Distribution {
         events.onStarted = () => {
             this._onStarted();
         };
-        events.run(this._config.onStartTimeout);
+        events.run(this._config.delayOnStart);
     }
 
     /**
-     * Signs request data.
+     * Modifies request data like adding appropriate data, may be sign.
      * Should be overloaded.
      *
      * @param {Object} data
      */
-    signRequest(data) {
+    modifyRequest(data) {
     }
 
     /**
@@ -172,7 +172,7 @@ class Distribution {
         if ("updated" === event) {
             request.data.previousVersion = this._previousVersion;
         }
-        this.signRequest(request.data);
+        this.modifyRequest(request.data);
         // console.log("request", request);///
         PromiseBasedXHR(request)
             .then((xhr) => {
