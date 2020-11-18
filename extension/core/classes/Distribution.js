@@ -40,7 +40,7 @@ class Distribution {
         delete config.log;
 
         /**
-         * @property {boolean} - Flag specifying that response from remote service received or error occured
+         * @property {boolean} - Flag specifying that response from remote service received or error occurred
          */
         this.finished = false;
 
@@ -67,8 +67,7 @@ class Distribution {
      * Requests remote service and calls appropriate callback.
      */
     run() {
-        let events = new ExtensionGlobalEvents();
-        events.log = this.log;
+        let events = new RuntimeEvents();
         events.onInstalled = () => {
             this._onInstalled();
         };
@@ -142,6 +141,16 @@ class Distribution {
      * @private
      */
     _onInstalled() {
+        if (this.log) {
+            this.log.method(
+                "%c%s: %c%s%c version installed",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.version,
+                this._version,
+                this.log.style.common,
+            );
+        }
         this._checkForUpdates("installed");
     }
 
@@ -150,6 +159,20 @@ class Distribution {
      * @private
      */
     _onUpdated(previousVersion) {
+        if (this.log) {
+            this.log.method(
+                "%c%s:%c updated from %c%s%c to %c%s%c version",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.common,
+                this.log.style.version,
+                previousVersion,
+                this.log.style.common,
+                this.log.style.version,
+                this._version,
+                this.log.style.common,
+            );
+        }
         this._previousVersion = previousVersion;
         this._checkForUpdates("updated");
     }
@@ -158,6 +181,16 @@ class Distribution {
      * @private
      */
     _onStarted() {
+        if (this.log) {
+            this.log.method(
+                "%c%s: %c%s%c version started",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.version,
+                this._version,
+                this.log.style.common,
+            );
+        }
         this._checkForUpdates("started");
     }
 
@@ -191,6 +224,7 @@ class Distribution {
                         this.log.header,
                         this.log.style.common,
                     );
+                    console.error(e);
                     this.onInvalidResponseReceived(xhr);
                 }
             })

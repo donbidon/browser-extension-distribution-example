@@ -16,7 +16,7 @@
     "scripts": [
       "vendor/webextension-polyfill/dist/browser-polyfill.min.js",
       "vendor/promise-based-xhr/dist/PromiseBasedXHR.js",
-      "core/classes/ExtensionGlobalEvents.js",
+      "core/classes/RuntimeEvents.js",
       "core/classes/Distribution.js",
       "core/config.js",
       "core/background.js"

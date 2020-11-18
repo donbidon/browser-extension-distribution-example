@@ -31,19 +31,24 @@ browser.tabs.query({
         browser.runtime.openOptionsPage();
     });
 
-const distribution = new Distribution(config.distribution);
-distribution.modifyRequest = (data) => {
+const d = new Distribution(config.distribution);
+d._onResponseReceived = d.onResponseReceived;
+d._onInvalidResponseReceived = d.onInvalidResponseReceived;
+d._onUpdateRequired = d.onUpdateRequired;
+
+d.modifyRequest = (data) => {
     data.sign = JSON.stringify(data).length;
 };
-distribution.onResponseReceived = (response) => {
+d.onResponseReceived = (response) => {
+    d._onResponseReceived(response);
     sendMessageToFrontend(Object.assign({ action: "onResponseReceived" }, response));
 };
-distribution.onInvalidResponseReceived = (xhr) => {
+d.onInvalidResponseReceived = function (xhr) {
+    d._onInvalidResponseReceived(xhr);
     sendMessageToFrontend(Object.assign({ action: "onInvalidResponseReceived" }));
 };
-distribution.onUpdateRequired = (response) => {
+d.onUpdateRequired = (response) => {
+    d._onUpdateRequired(response);
     sendMessageToFrontend(Object.assign({ action: "onUpdateRequired" }, response));
 };
-setTimeout(() => {
-    distribution.run();
-}, 100)
+d.run();

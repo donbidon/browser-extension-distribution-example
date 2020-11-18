@@ -10,7 +10,7 @@ require_once sprintf("%s/../code/_.php", __DIR__);
   <meta charset="utf-8" />
   <title>Self Distributed Example - Control Panel</title>
 
-  <link rel="icon" type="image/png" href="assets/images/icon.png" />
+  <link rel="icon" type="image/png" href="assets/images/icon.svg" />
 
   <link
     rel="stylesheet"
