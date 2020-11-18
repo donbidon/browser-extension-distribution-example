@@ -11,7 +11,7 @@ const config = {
                 common: "font-style: italic;",
             },
         },
-        onStartTimeout: 100,
+        delayOnStart: 100,
         // PromiseBasedXHR arguments
         request: {
             method: "POST",
