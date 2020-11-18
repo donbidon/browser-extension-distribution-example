@@ -51,4 +51,8 @@ d.onUpdateRequired = (response) => {
     d._onUpdateRequired(response);
     sendMessageToFrontend(Object.assign({ action: "onUpdateRequired" }, response));
 };
-d.run();
+
+// Wait for frontend page is loaded
+setTimeout(() => {
+    d.run();
+}, 100);
