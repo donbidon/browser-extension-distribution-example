@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+
+  "name": "Self distributed example",
+  "description": "Self distributed browser extension example",
+  "version": "0.0.0",
+
+  "permissions": [
+    "http://distribution.local/*",
+    "http://distribution.rf.gd/*"
+  ],
+
+  "content_security_policy": "script-src 'self' https://code.jquery.com/; object-src 'self'",
+
+  "background": {
+    "scripts": [
+      "vendor/webextension-polyfill/dist/browser-polyfill.min.js",
+      "vendor/promise-based-xhr/dist/PromiseBasedXHR.js",
+      "core/classes/ExtensionGlobalEvents.js",
+      "core/classes/Distribution.js",
+      "core/config.js",
+      "core/background.js"
+    ]
+  },
+
+  "icons": {
+    "64": "frontend/images/icon.png"
+  },
+
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "frontend/options.html"
+  }
+}

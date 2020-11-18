@@ -1,0 +1,10 @@
+body {
+  padding: 4px 8px;
+}
+th {
+  background: #CCC;
+  text-align: center;
+}
+td {
+  text-align: right;
+}

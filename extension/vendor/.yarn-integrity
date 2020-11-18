@@ -1,0 +1,18 @@
+{
+  "systemParams": "win32-x64-83",
+  "modulesFolders": [
+    "vendor"
+  ],
+  "flags": [],
+  "linkedModules": [],
+  "topLevelPatterns": [
+    "promise-based-xhr@*",
+    "webextension-polyfill@*"
+  ],
+  "lockfileEntries": {
+    "promise-based-xhr@*": "https://registry.yarnpkg.com/promise-based-xhr/-/promise-based-xhr-1.0.2.tgz#16320061cfd87f4bc66148a7507023626c7b2666",
+    "webextension-polyfill@*": "https://registry.yarnpkg.com/webextension-polyfill/-/webextension-polyfill-0.7.0.tgz#0df1120ff0266056319ce1a622b09ad8d4a56505"
+  },
+  "files": [],
+  "artifacts": {}
+}
