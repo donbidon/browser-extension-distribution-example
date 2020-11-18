@@ -32,7 +32,7 @@ browser.tabs.query({
     });
 
 const distribution = new Distribution(config.distribution);
-distribution.signRequest = (data) => {
+distribution.modifyRequest = (data) => {
     data.sign = JSON.stringify(data).length;
 };
 distribution.onResponseReceived = (response) => {
