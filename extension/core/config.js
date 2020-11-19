@@ -11,7 +11,8 @@ const config = {
                 common: "font-style: italic;",
             },
         },
-        delayOnStart: 100,
+        // Delay to open frontend tab
+        delayBeforeRequest: 300,
         // PromiseBasedXHR arguments
         request: {
             method: "POST",
@@ -27,5 +28,15 @@ const config = {
                 id: 'browser-extension-distribution',
             },
         },
+
+        // for DistributionBasedOnRuntimeEvents
+        delayOnStart: 10,
+
+        // for DistributionBasedOnStorage
+        /**
+         * @type {browser.storage.StorageArea} -
+         * {@link https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/StorageArea}
+         */
+        storage: browser.storage.local,
     },
 };

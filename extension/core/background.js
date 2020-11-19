@@ -1,11 +1,15 @@
 "use strict";
 
+/**
+ * @param {Object} message
+ * @returns {Promise<unknown>}
+ */
 function sendMessageToFrontend(message) {
     return new Promise((resolve, reject) => {
         browser.tabs.query({})
             .then((tabs) => {
                 for (let tab of tabs) {
-                    browser.tabs.sendMessage(tab.id, message).catch((e) => {});
+                    browser.tabs.sendMessage(tab.id, message).catch(() => {});
                 }
                 resolve();
             })
@@ -31,7 +35,12 @@ browser.tabs.query({
         browser.runtime.openOptionsPage();
     });
 
-const d = new Distribution(config.distribution);
+////////////////
+const d = new DistributionBasedOnRuntimeEvents(config.distribution);
+////////////////
+// const d = new DistributionBasedOnStorage(config.distribution);
+////////////
+
 d._onResponseReceived = d.onResponseReceived;
 d._onInvalidResponseReceived = d.onInvalidResponseReceived;
 d._onUpdateRequired = d.onUpdateRequired;
@@ -52,7 +61,4 @@ d.onUpdateRequired = (response) => {
     sendMessageToFrontend(Object.assign({ action: "onUpdateRequired" }, response));
 };
 
-// Wait for frontend page is loaded
-setTimeout(() => {
-    d.run();
-}, 100);
+d.run();

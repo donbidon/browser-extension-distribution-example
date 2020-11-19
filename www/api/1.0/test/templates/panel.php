@@ -8,7 +8,7 @@ require_once sprintf("%s/../code/_.php", __DIR__);
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Self Distributed Example - Control Panel</title>
+  <title>Self Distributed - Panel</title>
 
   <link rel="icon" type="image/png" href="assets/images/icon.svg" />
 
@@ -21,6 +21,8 @@ require_once sprintf("%s/../code/_.php", __DIR__);
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
+
+<div style="text-align: center;">Feel free to use F5 to refresh page.</div>
 
 <div>
 
@@ -73,7 +75,7 @@ require_once sprintf("%s/../code/_.php", __DIR__);
     <div class="form-group row">
       <form method="get" action="" class="col-sm-12">
         <input type="hidden" name="cleanup" value="1">
-        <table cellpadding="2" cellspacing="2" border="2">
+        <table cellpadding="2" cellspacing="2" border="2" width="100%">
           <thead>
             <th>Time</th>
             <th>IP</th>

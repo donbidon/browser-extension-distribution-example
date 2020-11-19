@@ -1,32 +1,30 @@
 "use strict";
 /**
- * Class implementing browser extension self distribution.
- *
  * @copyright <a href="http://donbidon.rf.gd/" target="_blank">donbidon</a>
  * @license https://opensource.org/licenses/mit-license.php
  */
 
 /**
- * Class implementing browser extension self distribution.
- *
  * Example:
- * let distribution = new Distribution({
+ * let d = new ChildOfDistribution({
  *     // @see config.distribution section
  * });
- * // distribution.log = null; // Suppress debug output to browser console
- * distribution.modifyRequest = (data) => {
+ * // d.log = null; // Suppress debug output to browser console
+ * d.modifyRequest = (data) => {
  *     // data.sign = ...;
  * };
- * distribution.onResponseReceived = (response) => {
+ * d.onResponseReceived = (response) => {
  *     // ...
  * };
- * distribution.onInvalidResponseReceived = (xhr) => {
+ * d.onInvalidResponseReceived = (xhr) => {
  *     // ...
  * };
- * distribution.onUpdateRequired = (response) => {
+ * d.onUpdateRequired = (response) => {
  *     // ...
  * };
- * distribution.run();
+ * d.run();
+ *
+ * @abstract
  */
 class Distribution {
     /**
@@ -40,21 +38,21 @@ class Distribution {
         delete config.log;
 
         /**
-         * @property {boolean} - Flag specifying that response from remote service received or error occurred
+         * @property {boolean}
          */
-        this.finished = false;
+        this.responseReceived = false;
 
         /**
          * @property {Object}
-         * @private
+         * @protected
          */
-        this._config = config;
+        this.__config = config;
 
         /**
          * @property {string} - Current version of extension
-         * @private
+         * @protected
          */
-        this._version = browser.runtime.getManifest().version;
+        this.__version = browser.runtime.getManifest().version;
 
         /**
          * @property {string} - Previous version of extension in case of updating
@@ -64,25 +62,14 @@ class Distribution {
     }
 
     /**
-     * Requests remote service and calls appropriate callback.
+     * @abstract
      */
-    run() {
-        let events = new RuntimeEvents();
-        events.onInstalled = () => {
-            this._onInstalled();
-        };
-        events.onUpdated = (previousVersion) => {
-            this._onUpdated(previousVersion);
-        };
-        events.onStarted = () => {
-            this._onStarted();
-        };
-        events.run(this._config.delayOnStart);
+    async run() {
     }
 
     /**
-     * Modifies request data like adding appropriate data, may be sign.
-     * Should be overloaded.
+     * Modifies request like adding appropriate data, may be sign.
+     * Can be overloaded.
      *
      * @param {Object} data
      */
@@ -91,25 +78,25 @@ class Distribution {
 
     /**
      * Called if remote service returned successful response.
-     * Should be overloaded.
+     * Can be overloaded.
      *
      * @param {Object} response - Successful response data
      */
     onResponseReceived(response) {
         if (this.log) {
             this.log.method(
-                "%c%s:%c Response received",
+                "%c%s:%c Response received:",
                 this.log.style.header,
                 this.log.header,
                 this.log.style.common,
+                response,
             );
-            console.log(response);
         }
     }
 
     /**
      * Called if requesting remote service failed.
-     * Should be overloaded.
+     * Can be overloaded.
      *
      * @param {XMLHttpRequest} xhr
      */
@@ -121,50 +108,50 @@ class Distribution {
                 this.log.header,
                 this.log.style.common,
             );
-            this.log.method(xhr);
+            console.error(xhr);
         }
     }
 
     /**
      * Called if remote service returned different version then current and severity is critical.
-     * Should be overloaded.
+     * Can be overloaded.
      *
      * @param {Object} response - Response data
      */
     onUpdateRequired(response) {
         if (this.log) {
             this.log.method(
-                "%c%s:%c Update required",
+                "%c%s:%c Update required, response received:",
                 this.log.style.header,
                 this.log.header,
                 this.log.style.common,
+                response,
             );
-            this.log.method(response);
         }
     }
 
     /**
-     * @private
+     * @protected
      */
-    _onInstalled() {
+    __onInstalled() {
         if (this.log) {
             this.log.method(
                 "%c%s: %c%s%c version installed",
                 this.log.style.header,
                 this.log.header,
                 this.log.style.version,
-                this._version,
+                this.__version,
                 this.log.style.common,
             );
         }
-        this._checkForUpdates("installed");
+        return this._checkForUpdates("installed");
     }
 
     /**
      * @param {string} previousVersion - Previous extension version
-     * @private
+     * @protected
      */
-    _onUpdated(previousVersion) {
+    __onUpdated(previousVersion) {
         if (this.log) {
             this.log.method(
                 "%c%s:%c updated from %c%s%c to %c%s%c version",
@@ -175,50 +162,58 @@ class Distribution {
                 previousVersion,
                 this.log.style.common,
                 this.log.style.version,
-                this._version,
+                this.__version,
                 this.log.style.common,
             );
         }
         this._previousVersion = previousVersion;
-        this._checkForUpdates("updated");
+        return this._checkForUpdates("updated");
     }
 
     /**
-     * @private
+     * @protected
      */
-    _onStarted() {
+    __onStarted() {
         if (this.log) {
             this.log.method(
                 "%c%s: %c%s%c version started",
                 this.log.style.header,
                 this.log.header,
                 this.log.style.version,
-                this._version,
+                this.__version,
                 this.log.style.common,
             );
         }
-        this._checkForUpdates("started");
+        return this._checkForUpdates("started");
     }
 
     /**
      * @param {string} event
      * @private
      */
-    _checkForUpdates(event) {
-        let request = { ...(this._config.request) };
-        request.data.version = this._version;
+    async _checkForUpdates(event) {
+        let request = { ...(this.__config.request) };
+        request.data.version = this.__version;
         request.data.event = event;
         if ("updated" === event) {
             request.data.previousVersion = this._previousVersion;
         }
         this.modifyRequest(request.data);
-        // console.log("request", request);///
+        if (this.log) {
+            this.log.method(
+                "%c%s:%c Sending request:",
+                this.log.style.header,
+                this.log.header,
+                this.log.style.common,
+                request,
+            );
+        }
+        await new Promise(resolve => setTimeout(resolve, this.__config.delayBeforeRequest));
         PromiseBasedXHR(request)
             .then((xhr) => {
-                // console.log(xhr.response);///
                 try {
                     const response = JSON.parse(xhr.response);
-                    if (response.version > this._version && "critical" === response.severity) {
+                    if (response.version > this.__version && "critical" === response.severity) {
                         this.onUpdateRequired(response);
                     } else {
                         this.onResponseReceived(response);
@@ -240,7 +235,7 @@ class Distribution {
                 this.onInvalidResponseReceived(xhr);
             })
             .finally(() => {
-                this.finished = true;
+                this.responseReceived = true;
             });
     }
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Class handling installing/updating runtime events and start of browser extension.
+ * Class handling installing/updating runtime events and starting of browser extension.
  *
  * Example:
  * let runtimeEvents = new RuntimeEvents();
@@ -32,15 +32,15 @@ class RuntimeEvents {
     }
 
     /**
-     * Called when extension is just installed.
-     * Should be overloaded.
+     * Called if extension is just installed.
+     * Can be overloaded.
      */
     onInstalled() {
     }
 
     /**
-     * Called when extension is updated.
-     * Should be overloaded.
+     * Called if extension version changed.
+     * Can be overloaded.
      *
      * @param {string} previousVersion
      */
@@ -48,8 +48,8 @@ class RuntimeEvents {
     }
 
     /**
-     * Called when extension is started.
-     * Should be overloaded.
+     * Called if extension is started.
+     * Can be overloaded.
      */
     onStarted() {
     }
@@ -57,7 +57,7 @@ class RuntimeEvents {
     /**
      * Adds listeners after object is configured.
      *
-     * @param {int} delay - Delay to start after registering browser.runtime.onInstalled listener.
+     * @param {int} delay - Delay process browser.runtime.onInstalled event if happened before calling this.onStarted()
      */
     run(delay) {
         browser.runtime.onInstalled.addListener((details) => {
@@ -84,7 +84,11 @@ class RuntimeEvents {
                 let previousVersion = details.previousVersion;
                 if (previousVersion !== this._version) {
                     this._started = true;
-                    this.onUpdated(previousVersion);
+                    if (previousVersion < this._version) {
+                        this.onUpdated(previousVersion);
+                    } else {
+                        this.onUpdated(previousVersion);
+                    }
                 }
                 break; // case "update"
         }

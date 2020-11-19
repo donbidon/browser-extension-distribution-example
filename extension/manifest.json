@@ -6,6 +6,8 @@
   "version": "0.0.0",
 
   "permissions": [
+    "storage",
+    "tabs",
     "http://distribution.local/*",
     "http://distribution.rf.gd/*"
   ],
@@ -18,6 +20,8 @@
       "vendor/promise-based-xhr/dist/PromiseBasedXHR.js",
       "core/classes/RuntimeEvents.js",
       "core/classes/Distribution.js",
+      "core/classes/DistributionBasedOnRuntimeEvents.js",
+      "core/classes/DistributionBasedOnStorage.js",
       "core/config.js",
       "core/background.js"
     ]
