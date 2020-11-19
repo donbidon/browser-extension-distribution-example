@@ -35,7 +35,7 @@ folder;
 * In CLI go to "extension" folder and run: `yarn upgrade`.
 
 ### Donate
-[YooMoney (ex-Yandex.Money), Visa, MasterCard, Maestro](https://https://yoomoney.ru/to/41001351141494).
+[YooMoney (ex-Yandex.Money), Visa, MasterCard, Maestro](https://yoomoney.ru/to/41001351141494).
 
 [![Donate to liberapay](http://img.shields.io/liberapay/receives/don.bidon.svg?logo=liberapay)](https://liberapay.com/don.bidon/donate)
 
