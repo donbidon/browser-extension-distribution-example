@@ -47,7 +47,7 @@ div.loader img {
 }
 
 div.content {
-  width: 256px;
+  width: 50%;
   display: none;
 }
 
@@ -69,4 +69,9 @@ div.content {
 div.header {
   border-bottom: 1px dashed #333;
   margin-bottom: 10px;
+}
+
+pre {
+  width: 100%;
+  text-align: left;
 }

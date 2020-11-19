@@ -79,6 +79,26 @@ class Distribution {
     }
 
     /**
+     * Decide about updates.
+     * Can be overloaded.
+     *
+     * @param {Object} response
+     */
+    processResponse(response) {
+        let callOnResponseReceived = true;
+        for (let update of response.updates) {
+            if (update.version > this.__version && "critical" === update.severity) {
+                callOnResponseReceived = false;
+                this.onUpgradeRequired(response, update);
+                break;
+            }
+        }
+        if (callOnResponseReceived) {
+            this.onResponseReceived(response);
+        }
+    }
+
+    /**
      * Called if remote service returned successful response.
      * Can be overloaded.
      *
@@ -119,15 +139,16 @@ class Distribution {
      * Can be overloaded.
      *
      * @param {Object} response - Response data
+     * @param {Object} update
      */
-    onUpgradeRequired(response) {
+    onUpgradeRequired(response, update) {
         if (this.log) {
             this.log.method(
-                "%c%s:%c Update required, response received:",
+                "%c%s:%c Update required:",
                 this.log.style.header,
                 this.log.header,
                 this.log.style.common,
-                response,
+                update,
             );
         }
     }
@@ -215,15 +236,11 @@ class Distribution {
             .then((xhr) => {
                 try {
                     const response = JSON.parse(xhr.response);
-                    if (response.version > this.__version && "critical" === response.severity) {
-                        this.onUpgradeRequired(response);
-                    } else {
-                        this.onResponseReceived(response);
-                    }
+                    this.processResponse(response);
                 } catch (e) {
                     if (this.log) {
                         console.error(
-                            "%c%s:%c Cannot parse JSON response",
+                            "%c%s:%c Invalid response",
                             this.log.style.header,
                             this.log.header,
                             this.log.style.common,

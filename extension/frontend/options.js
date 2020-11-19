@@ -8,10 +8,9 @@ browser.runtime.onMessage.addListener((request, sender) => {
     });
     $('div.content').fadeIn(() => {
         const $node = $(`#${request.action}`), childNodes = $node.children();
-        if (childNodes.length > 1) {
-            $(childNodes)[1].append(request.severity);
-            $(childNodes)[2].append(request.version);
-            $($(childNodes)[3]).html(request.html);
+        $(childNodes)[1].append(JSON.stringify(request.response, null, 2));
+        if (childNodes.length > 2) {
+            $(childNodes)[2].append(JSON.stringify(request.update, null, 2));
         }
         $node.show();
     });

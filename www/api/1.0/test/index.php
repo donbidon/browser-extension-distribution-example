@@ -73,9 +73,6 @@ try {
         throw new RuntimeException("Response not set", 500);
     }
 
-    $response = $_POST;
-    echo json_encode($_SESSION['response']);
-
     $request = array_intersect_key($request, [
         'event' => null,
         'version' => null,
@@ -92,6 +89,13 @@ try {
     if (sizeof($_SESSION['log']) > LOG_MAX_COUNT) {
         array_shift($_SESSION['log']);
     }
+
+    $response = [
+        'updates' => [
+            $_SESSION['response'],
+        ],
+    ];
+    echo json_encode($response);
 
 } catch (RuntimeException $e) {
     $code = $e->getCode();

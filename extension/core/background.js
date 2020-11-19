@@ -50,15 +50,31 @@ d.modifyRequest = (data) => {
 };
 d.onResponseReceived = (response) => {
     d._onResponseReceived(response);
-    sendMessageToFrontend(Object.assign({ action: "onResponseReceived" }, response));
+    sendMessageToFrontend({
+        action: "onResponseReceived",
+        response: response,
+    });
 };
 d.onInvalidResponseReceived = function (xhr) {
     d._onInvalidResponseReceived(xhr);
-    sendMessageToFrontend(Object.assign({ action: "onInvalidResponseReceived" }));
+    let response;
+    try {
+        response = JSON.parse(xhr.response);
+    } catch (e) {
+        response = xhr.response;
+    }
+    sendMessageToFrontend({
+        action: "onInvalidResponseReceived",
+        response: response,
+    });
 };
-d.onUpgradeRequired = (response) => {
-    d._onUpgradeRequired(response);
-    sendMessageToFrontend(Object.assign({ action: "onUpgradeRequired" }, response));
+d.onUpgradeRequired = (response, update) => {
+    d._onUpgradeRequired(response, update);
+    sendMessageToFrontend({
+        action: "onUpgradeRequired",
+        response: response,
+        update: update,
+    });
 };
 
 (async () => {
