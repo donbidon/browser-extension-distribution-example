@@ -57,7 +57,8 @@ class RuntimeEvents {
     /**
      * Adds listeners after object is configured.
      *
-     * @param {int} delay - Delay process browser.runtime.onInstalled event if happened before calling this.onStarted()
+     * @param {int} delay - Delay to process browser.runtime.onInstalled event if happened
+     * before calling this.onStarted()
      */
     run(delay) {
         browser.runtime.onInstalled.addListener((details) => {
