@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Self distributed example",
-  "description": "Self distributed browser extension example",
+  "name": "Self-distributed example",
+  "description": "Self-distributed browser extension example",
   "version": "0.0.0",
 
   "permissions": [

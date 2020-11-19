@@ -1,4 +1,4 @@
-# Self distributed browser extension
+# Self-distributed Google Chrome/Mozilla Firefox browsers extension
 
 If you
 * cannot give public access to your extension,
