@@ -27,7 +27,7 @@ console;
 * You can set up own remote service based on simple example from "www"
 folder;
 * Modify "extension/core/config.js", "extension/core/background.js" and
-"frontend/*" according to your needs. 
+"frontend/*" according to your needs.
 
 ### Update dependencies
 * Install [node.js](https://nodejs.org/en/download/);
