@@ -43,7 +43,7 @@ const d = new DistributionBasedOnRuntimeEvents(config.distribution);
 
 d._onResponseReceived = d.onResponseReceived;
 d._onInvalidResponseReceived = d.onInvalidResponseReceived;
-d._onUpdateRequired = d.onUpdateRequired;
+d._onUpgradeRequired = d.onUpgradeRequired;
 
 d.modifyRequest = (data) => {
     data.sign = JSON.stringify(data).length;
@@ -56,9 +56,13 @@ d.onInvalidResponseReceived = function (xhr) {
     d._onInvalidResponseReceived(xhr);
     sendMessageToFrontend(Object.assign({ action: "onInvalidResponseReceived" }));
 };
-d.onUpdateRequired = (response) => {
-    d._onUpdateRequired(response);
-    sendMessageToFrontend(Object.assign({ action: "onUpdateRequired" }, response));
+d.onUpgradeRequired = (response) => {
+    d._onUpgradeRequired(response);
+    sendMessageToFrontend(Object.assign({ action: "onUpgradeRequired" }, response));
 };
 
-d.run();
+(async () => {
+    await d.run();
+    console.log(1);///
+})();
+console.log(2);///

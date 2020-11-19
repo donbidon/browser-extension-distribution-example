@@ -51,7 +51,7 @@ div.content {
   display: none;
 }
 
-#onInvalidResponseReceived, #onResponseReceived, #onUpdateRequired {
+#onInvalidResponseReceived, #onResponseReceived, #onUpgradeRequired {
   display: none;
   border: 1px solid black;
   padding: 16px;
@@ -62,7 +62,7 @@ div.content {
   background: lightpink;
 }
 
-#onUpdateRequired {
+#onUpgradeRequired {
   background: lightyellow;
 }
 

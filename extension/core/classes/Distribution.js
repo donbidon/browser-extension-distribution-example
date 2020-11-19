@@ -19,7 +19,7 @@
  * d.onInvalidResponseReceived = (xhr) => {
  *     // ...
  * };
- * d.onUpdateRequired = (response) => {
+ * d.onUpgradeRequired = (response) => {
  *     // ...
  * };
  * d.run();
@@ -118,7 +118,7 @@ class Distribution {
      *
      * @param {Object} response - Response data
      */
-    onUpdateRequired(response) {
+    onUpgradeRequired(response) {
         if (this.log) {
             this.log.method(
                 "%c%s:%c Update required, response received:",
@@ -214,7 +214,7 @@ class Distribution {
                 try {
                     const response = JSON.parse(xhr.response);
                     if (response.version > this.__version && "critical" === response.severity) {
-                        this.onUpdateRequired(response);
+                        this.onUpgradeRequired(response);
                     } else {
                         this.onResponseReceived(response);
                     }
