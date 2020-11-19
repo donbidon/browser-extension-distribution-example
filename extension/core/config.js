@@ -16,7 +16,7 @@ const config = {
         // PromiseBasedXHR arguments
         request: {
             method: "POST",
-            url: "http://distribution.rf.gd/api/1.0/test/",
+            url: "https://distribution.rf.gd/api/1.0/test/",
             // url: "http://distribution.local/api/1.0/test/",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

@@ -9,7 +9,7 @@
     "storage",
     "tabs",
     "http://distribution.local/*",
-    "http://distribution.rf.gd/*"
+    "https://distribution.rf.gd/*"
   ],
 
   "content_security_policy": "script-src 'self' https://code.jquery.com/; object-src 'self'",
