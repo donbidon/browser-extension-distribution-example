@@ -63,6 +63,6 @@ d.onUpgradeRequired = (response) => {
 
 (async () => {
     await d.run();
-    console.log(1);///
-})();
-console.log(2);///
+})().then(() => {
+    console.info("Response processed");///
+});

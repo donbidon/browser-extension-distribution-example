@@ -4,6 +4,9 @@
  * @license https://opensource.org/licenses/mit-license.php
  */
 
+/**
+ * Storage (browser.storage) based distribution.
+ */
 class DistributionBasedOnStorage extends Distribution {
     async run() {
         const previousVersion = await this._getVersion();
@@ -16,6 +19,8 @@ class DistributionBasedOnStorage extends Distribution {
         } else {
             await this.__onStarted();
         }
+
+        await super.run();
     }
 
     /**

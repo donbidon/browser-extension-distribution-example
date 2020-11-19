@@ -4,6 +4,9 @@
  * @license https://opensource.org/licenses/mit-license.php
  */
 
+/**
+ * Runtime events (browser.runtime.onInstalled) based distribution.
+ */
 class DistributionBasedOnRuntimeEvents extends Distribution {
     async run() {
         let events = new RuntimeEvents();
@@ -17,5 +20,7 @@ class DistributionBasedOnRuntimeEvents extends Distribution {
             await this.__onStarted();
         };
         events.run(this.__config.delayOnStart);
+
+        await super.run();
     }
 }

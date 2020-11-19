@@ -5,6 +5,8 @@
  */
 
 /**
+ * Abstract distribution class.
+ *
  * Example:
  * let d = new ChildOfDistribution({
  *     // @see config.distribution section
@@ -61,10 +63,10 @@ class Distribution {
         this._previousVersion = null;
     }
 
-    /**
-     * @abstract
-     */
     async run() {
+        while (!this.responseReceived) {
+            await new Promise(resolve => setTimeout(resolve, 1));
+        }
     }
 
     /**
