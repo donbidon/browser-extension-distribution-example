@@ -18,10 +18,10 @@
     "scripts": [
       "vendor/webextension-polyfill/dist/browser-polyfill.min.js",
       "vendor/promise-based-xhr/dist/PromiseBasedXHR.js",
-      "core/classes/RuntimeEvents.js",
-      "core/classes/Distribution.js",
-      "core/classes/DistributionBasedOnRuntimeEvents.js",
-      "core/classes/DistributionBasedOnStorage.js",
+      "vendor/browser-extension-distribution/dist/RuntimeEvents.js",
+      "vendor/browser-extension-distribution/dist/Distribution.js",
+      "vendor/browser-extension-distribution/dist/DistributionBasedOnRuntimeEvents.js",
+      "vendor/browser-extension-distribution/dist/DistributionBasedOnStorage.js",
       "core/config.js",
       "core/background.js"
     ]

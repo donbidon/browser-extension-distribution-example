@@ -1,10 +1,10 @@
 {
-  "name": "browser-extension-distribution",
+  "name": "browser-extension-distribution-example",
   "version": "0.0.0",
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "promise-based-xhr": "*",
+    "browser-extension-distribution": "*",
     "webextension-polyfill": "*"
   }
 }

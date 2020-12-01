@@ -1,0 +1,26 @@
+{
+  "name": "browser-extension-distribution",
+  "version": "0.1.1",
+  "description": "Browsers extension distribution",
+  "keywords": [
+    "browser-extension",
+    "distribution"
+  ],
+  "author": "donbidon (http://donbidon.rf.gd/)",
+  "license": "MIT",
+  "homepage": "https://github.com/donbidon/browser-extension-distribution",
+  "bugs": {
+    "url": "https://github.com/donbidon/browser-extension-distribution/issues"
+  },
+  "repository": {
+    "url": "git+https://github.com/donbidon/browser-extension-distribution.git",
+    "type": "git"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "promise-based-xhr": "*",
+    "webextension-polyfill": "*"
+  }
+}

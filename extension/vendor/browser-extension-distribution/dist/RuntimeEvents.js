@@ -2,19 +2,22 @@
 
 /**
  * Class handling installing/updating runtime events and starting of browser extension.
- *
- * Example:
+ * <pre><code>
  * let runtimeEvents = new RuntimeEvents();
  * runtimeEvents.onInstalled = () => {
  *     console.log("onInstalled");
  * };
  * runtimeEvents.onUpdated = (previousVersion) => {
- *     console.log("onUpdated, from previous version %s", previousVersion);
+ *     console.log("onUpdated, %s to %s", previousVersion, this._version);
  * };
  * runtimeEvents.onStarted = () => {
  *     console.log("onStarted");
  * };
  * runtimeEvents.run(10);
+ * </code></pre>
+ *
+ * @author {@link https://donbidon.rf.gd/ donbidon}
+ * @license {@link https://opensource.org/licenses/mit-license.php MIT}
  */
 class RuntimeEvents {
     constructor() {

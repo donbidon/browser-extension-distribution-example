@@ -1,11 +1,14 @@
 "use strict";
-/**
- * @copyright <a href="http://donbidon.rf.gd/" target="_blank">donbidon</a>
- * @license https://opensource.org/licenses/mit-license.php
- */
 
 /**
- * Storage (browser.storage) based distribution.
+ * {@link https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage browser.storage}
+ * based distribution.<br /><br />
+ *
+ * See {@link https://github.com/donbidon/browser-extension-distribution-example
+ * Self-distributed Google Chrome/Mozilla Firefox browsers extension}.
+ *
+ * @author {@link https://donbidon.rf.gd/ donbidon}
+ * @license {@link https://opensource.org/licenses/mit-license.php MIT}
  */
 class DistributionBasedOnStorage extends Distribution {
     async run() {
@@ -28,7 +31,7 @@ class DistributionBasedOnStorage extends Distribution {
      * @private
      */
     async _getVersion() {
-        let version;
+        let version = null;
         await this.__config.storage.get({version: null})
             .then((data) => {
                 version = data.version;
@@ -42,6 +45,6 @@ class DistributionBasedOnStorage extends Distribution {
      * @private
      */
     _setVersion(version) {
-        return this.__config.storage.set({'version': version});
+        return this.__config.storage.set({version: version});
     }
 }

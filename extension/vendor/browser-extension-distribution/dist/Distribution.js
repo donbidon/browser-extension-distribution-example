@@ -1,36 +1,16 @@
 "use strict";
-/**
- * @copyright <a href="http://donbidon.rf.gd/" target="_blank">donbidon</a>
- * @license https://opensource.org/licenses/mit-license.php
- */
 
 /**
- * Abstract distribution class.
- *
- * Example:
- * let d = new ChildOfDistribution({
- *     // @see config.distribution section
- * });
- * // d.log = null; // Suppress debug output to browser console
- * d.modifyRequest = (data) => {
- *     // data.sign = ...;
- * };
- * d.onResponseReceived = (response) => {
- *     // ...
- * };
- * d.onInvalidResponseReceived = (xhr) => {
- *     // ...
- * };
- * d.onUpgradeRequired = (response) => {
- *     // ...
- * };
- * d.run();
+ * Distribution abstract class.
  *
  * @abstract
+ * @author {@link https://donbidon.rf.gd/ donbidon}
+ * @license {@link https://opensource.org/licenses/mit-license.php MIT}
  */
 class Distribution {
     /**
-     * @param {Object} config - {@see core/config.js}, {@see core/background.js}
+     * @param {Object} config - See {@link https://github.com/donbidon/browser-extension-distribution-example
+     * Self-distributed Google Chrome/Mozilla Firefox browsers extension}
      */
     constructor(config) {
         /**
@@ -63,6 +43,9 @@ class Distribution {
         this._previousVersion = null;
     }
 
+    /**
+     * Called after setting appropriate callbacks.
+     */
     async run() {
         while (!this.responseReceived) {
             await new Promise(resolve => setTimeout(resolve, 1));

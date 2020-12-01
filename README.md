@@ -30,14 +30,11 @@ folder;
 "frontend/*" according to your needs.
 
 ### Update dependencies
-* Install [node.js](https://nodejs.org/en/download/);
-* Install [Yarn package manager](https://yarnpkg.com/getting-started/install);
+* Install [node.js](https://nodejs.org/en/download/) if not installed;
+* Install [Yarn package manager](https://yarnpkg.com/getting-started/install) if not installed;
 * In CLI go to "extension" folder and run: `yarn upgrade`.
 
 ### Donate
 [YooMoney (ex-Yandex.Money), Visa, MasterCard, Maestro](https://yoomoney.ru/to/41001351141494).
 
 [![Donate to liberapay](http://img.shields.io/liberapay/receives/don.bidon.svg?logo=liberapay)](https://liberapay.com/don.bidon/donate)
-
-### Contacts
-Telegram: [@don_b_don](https://t.me/don_b_don).
