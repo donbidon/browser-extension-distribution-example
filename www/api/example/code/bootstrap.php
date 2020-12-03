@@ -1,4 +1,11 @@
 <?php
+/**
+ * Distribution API example bootstrap.
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
+ */
+
 declare(strict_types=1);
 
 require_once sprintf("%s/_.php", __DIR__);

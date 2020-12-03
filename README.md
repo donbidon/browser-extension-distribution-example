@@ -18,7 +18,7 @@ change it as you wish.
 
 ## Usage
 
-* Open [test panel](https://distribution.rf.gd/api/1.0/test/panel.php),
+* Open [test panel](https://distribution.rf.gd/api/example/panel.php),
 setup severity, version and HTML code that remote service will return 
 to this extension;
 * Open chrome://extensions/ in new tab, turn on developer mode and load

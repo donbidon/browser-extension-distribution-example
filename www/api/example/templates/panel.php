@@ -1,4 +1,11 @@
 <?php
+/**
+ * Distribution API example control panel template.
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
+ */
+
 declare(strict_types=1);
 
 require_once sprintf("%s/../code/_.php", __DIR__);

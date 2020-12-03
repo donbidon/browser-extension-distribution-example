@@ -1,4 +1,11 @@
 <?php
+/**
+ * Distribution API example entry point.
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
+ */
+
 declare(strict_types=1);
 
 define('ENTRY_POINT', true);

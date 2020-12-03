@@ -1,4 +1,11 @@
 <?php
+/**
+ * Distribution API example control panel.
+ *
+ * @author  [donbidon](http://donbidon.rf.gd/)
+ * @license [MIT](https://opensource.org/licenses/mit-license.php)
+ */
+
 declare(strict_types=1);
 
 define('ENTRY_POINT', true);
@@ -7,7 +14,6 @@ define('MAX_LENGTH', 1024);
 require_once "./code/bootstrap.php";
 
 session_name(SESSION_NAME);
-
 
 $post = "POST" === $_SERVER['REQUEST_METHOD'];
 if (!empty($_REQUEST[SESSION_NAME]) || $post) {
